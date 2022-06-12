@@ -1,0 +1,32 @@
+kibot:
+  version: 1
+
+preflight:
+  check_zone_fills: true
+  run_drc: true
+  run_erc: true
+  update_xml: true
+
+outputs:
+  - name: ibom
+    comment: 'Interactive BOM'
+    type: ibom
+    options:
+      dark_mode: true
+      netlist_file: '%F.xml'
+      extra_fields: 'LCSC,Mouser,Digikey,AliExpress,Note'
+
+  - name: schematic
+    type: pdf_sch_print
+
+  - name: 'bom_csv'
+    comment: "Bill of Materials in CSV format"
+    type: bom
+    options:
+      use_alt: false
+      number: 1
+      aggregate:
+        - file: electronics/view_screen/view_screen.sch
+          name: 'Screen'
+          number: 1
+          ref_id: 'SCREEN-'
