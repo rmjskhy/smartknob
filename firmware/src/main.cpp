@@ -1,6 +1,11 @@
 #include <Arduino.h>
 #include <SimpleFOC.h>
 
+#define USE_NIMBLE
+#include <BleKeyboard.h>
+
+BleKeyboard bleKeyboard;
+
 #include "display_task.h"
 #include "interface_task.h"
 #include "motor_task.h"
@@ -37,6 +42,7 @@ void setup() {
 
   motor_task.addListener(knob_state_debug_queue);
 
+bleKeyboard.begin();
   // Free up the loop task
   vTaskDelete(NULL);
 }
